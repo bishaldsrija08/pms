@@ -11,7 +11,6 @@ const Home = () => {
     useEffect(() => {
         fetchAllData()
     }, [])
-    console.log(products)
     return (
         <>
             <Navbar />
@@ -19,7 +18,7 @@ const Home = () => {
                 {
                     products.map((product) => {
                         return (
-                            <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg bg-white p-4">
+                            <div key={product.id} className="max-w-sm rounded-2xl overflow-hidden shadow-lg bg-white p-4">
                                 <img className="w-full h-48 object-cover rounded-xl" src={product.productImage} alt="Product Image" />
                                 <div className="mt-4">
                                     <h2 className="text-xl font-semibold text-gray-800">{product.productName}</h2>
