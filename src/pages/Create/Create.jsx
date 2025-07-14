@@ -26,19 +26,19 @@ const Create = () => {
     }
 
     //Second Approach - short
-    const addProduct = async (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        const data = Object.fromEntries(formData)
-        await axios.post("https://66e31cae494df9a478e44f01.mockapi.io/products", data)
-        navigate("/")
-    }
+    // const addProduct = async (e) => {
+    //     e.preventDefault()
+    //     const formData = new FormData(e.currentTarget)
+    //     const data = Object.fromEntries(formData)
+    //     await axios.post("https://66e31cae494df9a478e44f01.mockapi.io/products", data)
+    //     navigate("/")
+    // }
     return (
         <>
             <Navbar />
             <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-2xl shadow-md">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Create Product</h2>
-                <form onSubmit={addProduct}>
+                <form onSubmit={handleSubmit}>
                     {/* Product Name */}
                     <div className="mb-4">
                         <label className="block text-gray-700 font-medium mb-1" htmlFor="name">Product Name</label>
