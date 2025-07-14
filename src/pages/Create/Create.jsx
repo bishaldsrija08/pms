@@ -4,7 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-    const navigate =  useNavigate()
+    const navigate = useNavigate()
+    //First approach - most used
     const [data, setData] = useState({
         productName: "",
         productDescription: "",
@@ -12,7 +13,6 @@ const Create = () => {
     })
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(name, value);
         setData((prevData) => ({
             ...prevData,
             [name]: value
@@ -24,12 +24,21 @@ const Create = () => {
         await axios.post("https://66e31cae494df9a478e44f01.mockapi.io/products", data)
         navigate("/")
     }
+
+    //Second Approach - short
+    const addProduct = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const data = Object.fromEntries(formData)
+        await axios.post("https://66e31cae494df9a478e44f01.mockapi.io/products", data)
+        navigate("/")
+    }
     return (
         <>
             <Navbar />
             <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-2xl shadow-md">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Create Product</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={addProduct}>
                     {/* Product Name */}
                     <div className="mb-4">
                         <label className="block text-gray-700 font-medium mb-1" htmlFor="name">Product Name</label>
