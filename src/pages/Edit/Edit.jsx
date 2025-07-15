@@ -4,24 +4,26 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Edit = () => {
-    const { id } = useParams()
-    const navigate = useNavigate()
-    //Single fetch and display
-    const [data, setData] = useState({})
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const [data, setData] = useState({
+        productName: "",
+        productDescription: "",
+        productImage: ""
+    });
+
     const fetchSingleBlog = async () => {
-        const response = await axios.get("https://66e31cae494df9a478e44f01.mockapi.io/products/" + id);
-        setData({
-            productName: response.data.productName || "",
-            productDescription: response.data.productDescription || "",
-            productImage: response.data.productImage || ""
-        });
+        const response = await axios.get(
+            "https://66e31cae494df9a478e44f01.mockapi.io/products/" + id
+        );
+        setData(response.data);
     };
 
     useEffect(() => {
-        fetchSingleBlog()
-    }, [])
+        fetchSingleBlog();
+    }, []);
 
-    //First approach - most used
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData((prevData) => ({
@@ -31,10 +33,13 @@ const Edit = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent the default form submission behavior
-        await axios.post("https://66e31cae494df9a478e44f01.mockapi.io/products/" + id, data)
-        navigate("/")
-    }
+        e.preventDefault();
+        await axios.put(
+            "https://66e31cae494df9a478e44f01.mockapi.io/products/" + id,
+            data
+        );
+        navigate("/");
+    };
 
     return (
         <>
